@@ -1,3 +1,4 @@
+# hexlet_django_blog/urls.py
 """
 URL configuration for hexlet_django_blog project.
 
@@ -23,7 +24,7 @@ from .article.views import ArticleIndexView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('articles/', ArticleIndexView.as_view(), name='articles_index'),
+    path('articles/', include('hexlet_django_blog.article.urls')),
     path('about/', AboutView.as_view(), name='about'),
     path('admin/', admin.site.urls),
 ]
