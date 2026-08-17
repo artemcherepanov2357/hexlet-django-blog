@@ -6,16 +6,14 @@
     <title>{% block title %}Django на Хекслете{% endblock %}</title>
 </head>
 <body>
-<div id="sidebar">
-    {% block sidebar %}
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/articles/">Статьи</a></li>
-        </ul>
-    {% endblock %}
-</div>
-<div id="content">
-    {% block content %}{% endblock %}
-</div>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="{% url 'article:articles' %}">Статьи</a>
+        <a href="/admin">Админка</a>
+    </nav>
+    <div class="container">
+        {% block content %}
+        base.html
+        {% endblock %}
 </body>
 </html>

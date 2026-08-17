@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from hexlet_django_blog import views
 from .views import IndexView, AboutView
-from .article.views import ArticleIndexView
+
 
 
 urlpatterns = [
