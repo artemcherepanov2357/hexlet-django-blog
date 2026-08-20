@@ -1,5 +1,14 @@
-from django import forms  # Импортируем формы Django
+from django.forms import ModelForm
+from .models import Article
 
-
-class CommentArticleForm(forms.Form):
-    content = forms.CharField(label="Комментарий", max_length=200)  # Текст комментария
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Article
+        fields = ["name", "body"]
+        labels = {
+            "name": "Название статьи",
+            "body": "Содержание",
+        }
+        help_texts = {
+            "name": "Введите название статьи (не более 200 символов)",
+        }
