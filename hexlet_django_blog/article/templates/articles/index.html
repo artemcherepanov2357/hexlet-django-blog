@@ -22,6 +22,9 @@
         <a href="{% url 'article:articles_show' article.id %}">
             {{ article.name }}
         </a>
+        <a href="{% url 'article:articles_update' article.id %}" style="font-size: 14px; margin-left: 10px;">
+            Редактировать
+        </a>
     </h2>
     <div>{{ article.body|slice:":200" }}</div>
 {% endfor %}

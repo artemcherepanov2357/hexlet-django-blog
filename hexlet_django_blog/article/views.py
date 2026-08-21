@@ -21,6 +21,7 @@ class IndexView(View):
             },
         )
 
+
 class ArticleView(View):
     def get(self, request, *args, **kwargs):
         article = get_object_or_404(Article, id=kwargs["id"])
@@ -50,3 +51,25 @@ class ArticleFormCreateView(View):
         messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
         return render(request, 'articles/create.html', {'form': form})
 
+
+class ArticleFormEditView(View):
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs.get("id")
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(instance=article)
+        return render(
+            request, "articles/update.html", {"form": form, "article_id": article_id}
+        )
+
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get("id")
+        article = get_object_or_404(Article, id=article_id)
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Статья '{article.name}' успешно обновлена!")  # Флеш-сообщение
+            return redirect("article:articles")
+
+        return render(
+            request, "articles/update.html", {"form": form, "article_id": article_id}
+        )
