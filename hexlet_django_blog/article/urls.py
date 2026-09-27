@@ -1,11 +1,14 @@
-# hexlet_django_blog/article/views.py
 from django.urls import path
 
 from hexlet_django_blog.article.views import (
-    IndexView, ArticleView, ArticleFormCreateView, ArticleFormEditView, ArticleFormDeleteView,
+    ArticleFormCreateView,
+    ArticleFormDeleteView,
+    ArticleFormEditView,
+    ArticleView,
+    IndexView,
 )
 
-app_name = 'article'  # пространство имен
+app_name = "article"
 
 urlpatterns = [
     path("", IndexView.as_view(), name="articles"),

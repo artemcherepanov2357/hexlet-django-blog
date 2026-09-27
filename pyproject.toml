@@ -3,8 +3,39 @@ name = "hexlet-django-blog"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12,<3.14"
 dependencies = [
-    "django>=5.2.17",
+    "django>=6.1.1,<6.2",
     "python-dotenv>=1.2.3",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-django>=4.9",
+    "ruff>=0.9",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "hexlet_django_blog.settings"
+python_files = ["test_*.py", "tests.py"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+# Миграции не форматируем: они генерируются Django и должны оставаться как есть
+extend-exclude = [".venv", "**/migrations/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "DJ", "RUF"]
+# RUF003: кириллица в комментариях и строках — намеренно, проект русскоязычный
+ignore = ["RUF012", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"*/migrations/*" = ["E501"]
+# Канонические пути из startproject длиннее лимита
+"*/settings.py" = ["E402", "E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["hexlet_django_blog"]
